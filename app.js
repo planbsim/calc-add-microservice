@@ -1,14 +1,25 @@
-var express = require('express');
-var app = express();
-var cities = {cities:["Amsterdam","Berlin","New York","San Francisco","Tokyo"]}
+'use strict';
 
-app.get('/', function(req, res){
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify(cities));
-    res.end();
-});
+var express = require('express');
+const bodyParser = require('body-parser');
+
+var app = express();
+
+app.use(bodyParser.json());
+
+app.post('/', (req, res) => {
+    console.log('Request Body:\n', JSON.stringify(req.body, null, 4));
+    const augend = req.body.augend;
+    const addend = req.body.addend;
+    const sum = augend + addend;
+    res.header('Content-Type', 'application/json');
+    res.send(JSON.stringify({ result: sum }));
+  });
 
 var port = process.env.PORT || 8080;
-app.listen(port);
+
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`);
+  });
 
 module.exports = app;

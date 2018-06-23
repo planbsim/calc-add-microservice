@@ -3,11 +3,13 @@
 
   var app = require('../app.js');
 
-  describe('GET', function(){
+  describe('POST', function(){
     it('respond with json', function(done){
       request(app)
-      .get('/')
+      .post('/')
+      .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
+      .send('{"augend": 5, "addend": 9}')
       .expect('Content-Type', /json/)
       .expect(200, done);
     })
