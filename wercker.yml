@@ -28,7 +28,7 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
-    - internal-docker-push:
+    - internal/docker-push:
         cmd: npm start
         working-dir: $WERCKER_ROOT
         tag: $WERCKER_GIT_COMMIT
